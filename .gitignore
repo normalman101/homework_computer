@@ -1,6 +1,7 @@
 # IDE
 .idea/
 *.iml
+.clang-format
 
 # Build
 build/

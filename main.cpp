@@ -11,27 +11,27 @@ public:
                const std::string &architecture,
                const double &clock_speed,
                const double &performance_rating,
-               const double &energy_consumption)
+               const double &energy_consumption_in_wt)
 
         : m_name{name},
           m_architecture{architecture},
           m_clock_speed{clock_speed},
           m_performance_rating{performance_rating},
-          m_energy_consumption{energy_consumption} {
+          m_energy_consumption_in_wt{energy_consumption_in_wt} {
     }
 
     std::string getName() { return m_name; }
     std::string getArchitecture() { return m_architecture; }
     double getClockSpeed() const { return m_clock_speed; }
     double getPerformance() const { return m_performance_rating; }
-    double getEnergyConsumption() const { return m_energy_consumption; }
+    double getEnergyConsumption() const { return m_energy_consumption_in_wt; }
 
 protected:
     std::string m_name{};
     std::string m_architecture{};
     double m_clock_speed{};
     double m_performance_rating{};
-    double m_energy_consumption{};
+    double m_energy_consumption_in_wt{};
 };
 
 class CentralProcessingUnit : public Processing {
@@ -40,9 +40,9 @@ public:
                           const std::string &architecture,
                           const double &clock_speed,
                           const double &performance,
-                          const double &energy_consumption)
+                          const double &energy_consumption_in_wt)
 
-        : Processing{name, architecture, clock_speed, performance, energy_consumption} {
+        : Processing{name, architecture, clock_speed, performance, energy_consumption_in_wt} {
     }
 
     void outputInformationInConsole() const {
@@ -50,7 +50,7 @@ public:
         std::cout << "* Architecture: " << m_architecture << std::endl;
         std::cout << "* Clock speed: " << m_clock_speed << std::endl;
         std::cout << "* Performance rating: " << m_performance_rating << "/10" << std::endl;
-        std::cout << "* Energy consumption: " << m_energy_consumption << " Wt" <<  std::endl;
+        std::cout << "* Energy consumption: " << m_energy_consumption_in_wt << " Wt" <<  std::endl;
     }
 };
 
@@ -58,28 +58,28 @@ class GraphicalProcessingUnit : public Processing {
 public:
     GraphicalProcessingUnit(const std::string &name,
                             const std::string &architecture,
-                            const double &memory_capacity,
+                            const double &memory_capacity_in_gb,
                             const double &clock_speed,
                             const double &performance,
-                            const double &energy_consumption)
+                            const double &energy_consumption_in_wt)
 
-        : Processing{name, architecture, clock_speed, performance, energy_consumption},
-          m_memory_capacity{memory_capacity} {
+        : Processing{name, architecture, clock_speed, performance, energy_consumption_in_wt},
+          m_memory_capacity_in_gb{memory_capacity_in_gb} {
     }
 
-    double getMemoryCapacity() const { return m_memory_capacity; }
+    double getMemoryCapacity() const { return m_memory_capacity_in_gb; }
 
     void outputInformationInConsole() const {
         std::cout << m_name << " information: " << std::endl;
         std::cout << "* Architecture: " << m_architecture << std::endl;
-        std::cout << "* Memory capacity: " << m_memory_capacity << std::endl;
+        std::cout << "* Memory capacity: " << m_memory_capacity_in_gb << std::endl;
         std::cout << "* Clock speed: " << m_clock_speed << std::endl;
         std::cout << "* Performance rating: " << m_performance_rating << "/10" << std::endl;
-        std::cout << "* Energy consumption: " << m_energy_consumption << " Wt" << std::endl;
+        std::cout << "* Energy consumption: " << m_energy_consumption_in_wt << " Wt" << std::endl;
     }
 
 private:
-    double m_memory_capacity{};
+    double m_memory_capacity_in_gb{};
 };
 
 class Memory {
@@ -144,6 +144,7 @@ public:
 
     void outputInformationInConsole() const {
         std::cout << m_name << " information: " << std::endl;
+        std::cout << "* Memory type: " << m_memory_type << std::endl;
         std::cout << "* Memory capacity: " << m_memory_capacity_in_gb << std::endl;
         std::cout << "* Read speed: " << m_read_speed << std::endl;
         std::cout << "* Write speed: " << m_write_speed << std::endl;
@@ -186,31 +187,31 @@ class SupplyUnit {
 public:
     SupplyUnit(const std::string &name,
                const std::string &form_factor,
-               const double &power_in_watts,
+               const double &power_in_wt,
                const int &connector_quantity)
 
         : m_name{name},
           m_form_factor{form_factor},
-          m_power_in_watts{power_in_watts},
+          m_power_in_wt{power_in_wt},
           m_connector_quantity{connector_quantity} {
     }
 
     std::string getName() const { return m_name; }
     std::string getFormFactor() const { return m_form_factor; }
-    double getPower() const { return m_power_in_watts; }
+    double getPower() const { return m_power_in_wt; }
     int getConnectorQuantity() const { return m_connector_quantity; }
 
     void outputInformationInConsole() const {
         std::cout << m_name << " information:" << std::endl;
         std::cout << "* Form factor: " << m_form_factor << std::endl;
-        std::cout << "* Power: " << m_power_in_watts << " Wt" << std::endl;
+        std::cout << "* Power: " << m_power_in_wt << " Wt" << std::endl;
         std::cout << "* Connector quantity: " << m_connector_quantity << std::endl;
     }
 
 private:
     std::string m_name{};
     std::string m_form_factor{};
-    double m_power_in_watts{};
+    double m_power_in_wt{};
     int m_connector_quantity{};
 };
 
