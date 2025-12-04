@@ -9,6 +9,12 @@ using std::cout, std::endl;
 #pragma region Классы
 class Human {
 public:
+    Human()
+        : m_name("empty"),
+          m_surname("empty"),
+          m_patronymic("empty") {
+    }
+
     Human(const string &name,
           const string &surname,
           const string &patronymic)
@@ -18,36 +24,14 @@ public:
           m_patronymic(patronymic) {
     }
 
-    Human()
+    void setName(const string &name) { m_name = name; }
+    string getName() const { return m_name; }
 
-        : m_name("empty"),
-          m_surname("empty"),
-          m_patronymic("empty") {
-    }
+    void setSurname(const string &surname) { m_surname = surname; }
+    string getSurname() const { return m_surname; }
 
-    void setName(const string &name) {
-        m_name = name;
-    }
-
-    string getName() const {
-        return m_name;
-    }
-
-    void setSurname(const string &surname) {
-        m_surname = surname;
-    }
-
-    string getSurname() const {
-        return m_surname;
-    }
-
-    void setPatronymic(const string &patronymic) {
-        m_patronymic = patronymic;
-    }
-
-    string getPatronymic() const {
-        return m_patronymic;
-    }
+    void setPatronymic(const string &patronymic) { m_patronymic = patronymic; }
+    string getPatronymic() const { return m_patronymic; }
 
 protected:
     string m_name;
@@ -57,6 +41,10 @@ protected:
 
 class Teacher : public Human {
 public:
+    Teacher()
+        : m_discipline{"empty"} {
+    }
+
     Teacher(const string &name,
             const string &surname,
             const string &patronymic,
@@ -66,17 +54,8 @@ public:
           m_discipline{discipline} {
     }
 
-    Teacher()
-        : m_discipline{"empty"} {
-    }
-
-    void setDiscipline(const string &discipline) {
-        m_discipline = discipline;
-    }
-
-    string getDiscipline() const {
-        return m_discipline;
-    }
+    void setDiscipline(const string &discipline) { m_discipline = discipline; }
+    string getDiscipline() const { return m_discipline; }
 
 private:
     string m_discipline;
@@ -84,41 +63,26 @@ private:
 
 class Date {
 public:
-    Date(const string &date) {
-        m_day = stoi(date.substr(0, 2));
-        m_month = stoi(date.substr(3, 2));
-        m_year = stoi(date.substr(6, 4));
-    }
-
     Date()
         : m_day{0},
           m_month{0},
           m_year{0} {
     }
 
-    void setDay(const int &day) {
-        m_day = day;
+    Date(const string &date) {
+        m_day = stoi(date.substr(0, 2));
+        m_month = stoi(date.substr(3, 2));
+        m_year = stoi(date.substr(6, 4));
     }
 
-    int getDay() const {
-        return m_day;
-    }
+    void setDay(const int &day) { m_day = day; }
+    int getDay() const { return m_day; }
 
-    void setMonth(const int &month) {
-        m_month = month;
-    }
+    void setMonth(const int &month) { m_month = month; }
+    int getMonth() const { return m_month; }
 
-    int getMonth() const {
-        return m_month;
-    }
-
-    void setYear(const int &year) {
-        m_year = year;
-    }
-
-    int getYear() const {
-        return m_year;
-    }
+    void setYear(const int &year) { m_year = year; }
+    int getYear() const { return m_year; }
 
 private:
     int m_day;
@@ -128,6 +92,11 @@ private:
 
 class Mark {
 public:
+    Mark()
+        : m_discipline{"empty"},
+          m_mark{0} {
+    }
+
     Mark(const Teacher &teacher,
          const string &date,
          const string &discipline,
@@ -139,42 +108,17 @@ public:
           m_mark{mark} {
     }
 
-    Mark()
-        : m_discipline{"empty"},
-          m_mark{0} {
-    }
+    void setTeacher(const Teacher &teacher) { m_teacher = teacher; }
+    Teacher getTeacher() const { return m_teacher; }
 
-    void setTeacher(const Teacher &teacher) {
-        m_teacher = teacher;
-    }
+    void setDate(const Date &date) { m_date = date; }
+    Date getDate() const { return m_date; }
 
-    Teacher getTeacher() const {
-        return m_teacher;
-    }
+    void setDiscipline(const string &discipline) { m_discipline = discipline; }
+    string getDiscipline() const { return m_discipline; }
 
-    void setDate(const Date &date) {
-        m_date = date;
-    }
-
-    Date getDate() const {
-        return m_date;
-    }
-
-    void setDiscipline(const string &discipline) {
-        m_discipline = discipline;
-    }
-
-    string getDiscipline() const {
-        return m_discipline;
-    }
-
-    void setMark(const unsigned int &mark) {
-        m_mark = mark;
-    }
-
-    unsigned int getMark() const {
-        return m_mark;
-    }
+    void setMark(const unsigned int &mark) { m_mark = mark; }
+    unsigned int getMark() const { return m_mark; }
 
 private:
     Teacher m_teacher;
@@ -185,6 +129,11 @@ private:
 
 class Student : public Human {
 public:
+    Student()
+        : m_faculty{"empty"},
+          m_group{"empty"} {
+    }
+
     Student(const string &name,
             const string &surname,
             const string &patronymic,
@@ -198,31 +147,14 @@ public:
           m_marks{marks} {
     }
 
-    Student()
-        : m_faculty{"empty"},
-          m_group{"empty"} {
-    }
+    void setFaculty(const string &faculty) { m_faculty = faculty; }
+    string getFaculty() const { return m_faculty; }
 
-    void setFaculty(const string& faculty) {
-        m_faculty = faculty;
-    }
-    string getFaculty() const {
-        return m_faculty;
-    }
+    void setGroup(const string &group) { m_group = group; }
+    string getGroup() const { return m_group; }
 
-    void setGroup(const string& group) {
-        m_group = group;
-    }
-    string getGroup() const {
-        return m_group;
-    }
-
-    void setMarks(const vector<Mark>& marks) {
-        m_marks = marks;
-    }
-    vector<Mark> getMarks() const {
-        return m_marks;
-    }
+    void setMarks(const vector<Mark> &marks) { m_marks = marks; }
+    vector<Mark> getMarks() const { return m_marks; }
 
 private:
     string m_faculty;
